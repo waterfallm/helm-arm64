@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.name }}
+  name:  {{ .Values.name }}
+  namespace:  {{ .Values.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  {{ .Values.name }}
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      containers:
+      - name:  {{ .Values.name }}
+        image: {{ .Values.deployment.image }}:{{ .Values.deployment.tag }}
+        livenessProbe:
+          exec:
+            command:
+              - mongo
+              - --disableImplicitSessions
+              - --eval
+              - "db.adminCommand('ping')"
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 6

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app:  {{ .Values.name }}
+  name:  {{ .Values.name }}-api-nodeport-svc
+  namespace:  {{ .Values.name }}
+spec:
+  ports:
+  - port: 3000
+    protocol: TCP
+    targetPort: 3000
+    nodePort: {{ .Values.nodeportapi }}
+  selector:
+    app:  {{ .Values.name }}
+  type: NodePort

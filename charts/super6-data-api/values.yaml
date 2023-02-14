@@ -1,0 +1,6 @@
+deployment:
+  image: "matwater/super6-data-api"
+  tag: "23"
+name: "super6-data-api"
+nodeportapi: 30002
+nodeportcs: 30003
