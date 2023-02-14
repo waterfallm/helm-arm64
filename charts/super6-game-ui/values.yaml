@@ -1,0 +1,5 @@
+deployment:
+  image: "matwater/super6-game-ui"
+  tag: "10"
+name: "super6-game-ui"
+nodeport: 30004
